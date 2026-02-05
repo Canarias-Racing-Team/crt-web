@@ -71,6 +71,7 @@ const groups = (["large", "medium", "small"] as (keyof typeof sizeMap)[]).map(
         alt: item.alt ?? item.name ?? "",
         invert: item.invert,
         scale: "max-w-[75%] max-h-[75%]",
+        href: item.url,
       }))}
     alt="Logos de los patrocinadores"
     className="w-full h-full max-h-full"

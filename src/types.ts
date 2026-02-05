@@ -54,6 +54,7 @@ export type ImageEntry = {
   src: ImageData;
   invert?: boolean;
   scale?: string | number;
+  href?: string;
 };
 
 export type SupporterItem = {
