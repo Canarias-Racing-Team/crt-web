@@ -16,6 +16,11 @@ const navigationSections = [
         label: "Instagram",
       },
       {
+        href: texts.links.linkedin,
+        icon: "mdi:linkedin",
+        label: "LinkedIn",
+      },
+      {
         href: texts.links.dossier,
         icon: "mdi:text-box-outline",
         label: "Dossier (.pdf)",
@@ -74,7 +79,7 @@ const navigationSections = [
         <p class="text-xs font-semibold uppercase mb-3 text-base-content/60 tracking-wide">
           {section.title}
         </p>
-        <ul class="space-y-2 grid grid-cols-2">
+        <ul class={`space-y-1 grid grid-cols-2 md:grid-cols-${Math.ceil(section.items.length / 2)}`}>
           {section.items.map((item) => {
             const isSocial = "icon" in item;
             return (

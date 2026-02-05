@@ -3,7 +3,7 @@ export const texts = {
   // Enlaces de redes sociales
   links: {
     instagram: "https://www.instagram.com/canariasracingteam/",
-    linkedin: "https://www.linkedin.com/company/canariasracingteam/",
+    linkedin: "https://www.linkedin.com/company/canarias-racing-team/",
     dossier: "/dossieres/dossier_crt_25-26.pdf",
     wallpapers: "/crteam-wallpapers.zip",
     contact: "mailto:crteam@ull.edu.es",
