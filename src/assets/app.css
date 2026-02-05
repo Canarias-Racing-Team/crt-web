@@ -138,6 +138,12 @@ h6,
   height: auto;
 }
 
+.place-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .stat {
   overflow: hidden;
   width: fit-content;

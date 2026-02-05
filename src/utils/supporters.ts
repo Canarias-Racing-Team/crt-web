@@ -94,9 +94,9 @@ export async function loadSupportersFromCSV(
       item.size = (objNorm.size as any) || undefined;
     if (normKeys.includes("priority"))
       item.priority = objNorm.priority ? Number(objNorm.priority) : undefined;
-    // Support optional noFilter/no_filter/nofilter header -> set item.noFilter
-    if (normKeys.includes("nofilter"))
-      item.noFilter = objNorm.nofilter || undefined;
+    // Support optional invert header -> set item.invert
+    if (normKeys.includes("invert"))
+      item.invert= objNorm.invert|| undefined;
 
     // Intentar resolver logos locales bajo /src/assets/fotos/... usando loadImageEntries
     if (

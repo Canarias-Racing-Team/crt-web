@@ -2,15 +2,30 @@
 import { Image } from "astro:assets";
 import type { ImageEntry } from "@types";
 
-const { items = [], className = "" } = Astro.props;
+const {
+  items = [],
+  className = "",
+  invert = true,
+  scale = "max-w-full max-h-full",
+} = Astro.props;
 
 const resolvedItems =
   items.length > 0
     ? await Promise.all(
         items.map(async (item: ImageEntry) => ({
-          alt: item.alt,
+          alt: item.alt ?? item.name ?? "Imagen",
           src: item.src,
-        }))
+          invert: (() => {
+            let v = (item as any).invert ?? invert;
+            if (typeof v === "string") {
+              v = v.toLowerCase() === "true" || v === "1";
+            }
+            return !!v;
+          })(),
+          // allow passing a full Tailwind size class (e.g. "max-w-[65%] max-h-[65%]")
+          // otherwise fall back to the component-level `scale` default
+          scale: (item as any).scale ?? scale,
+        })),
       )
     : [];
 ---
@@ -26,7 +41,8 @@ const resolvedItems =
           alt={item.alt}
           sizes="(max-width: 768px) 80px, 138px"
           loading="lazy"
-          class="max-w-full max-h-full object-contain filter grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-300"
+          inferSize={true}
+          class={`${item.scale} object-contain filter grayscale ${item.invert ? "invert hover:invert-0" : ""} hover:grayscale-0 transition-all duration-300`}
         />
       </div>
     ))

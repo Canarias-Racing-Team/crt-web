@@ -233,10 +233,10 @@ try {
       <!-- Contenedor visible donde se mostrará la plantilla del año seleccionado -->
       <div
         id="supporters-container"
-        class="w-full"
+        class="w-full max-h-full"
         data-selected-year={selectedYear || ""}
       >
-        <Supporters items={supporters} className="w-full" />
+        <Supporters items={supporters} className="w-full max-h-full" />
       </div>
 
       <!-- Plantillas pre-renderizadas por año (ocultas) -->

@@ -6,6 +6,7 @@ export const texts = {
     linkedin: "https://www.linkedin.com/company/canariasracingteam/",
     dossier: "/dossieres/dossier_crt_25-26.pdf",
     wallpapers: "/crteam-wallpapers.zip",
+    contact: "mailto:crteam@ull.edu.es",
     // Formulario de inscripción al equipo
     joinUs: "https://docs.google.com/forms/d/e/1FAIpQLSfRk5ihl_rh55yh7abRbm05h9jfGZc3mQtAMFY83TTa19v6XA/viewform?fbclid=PAZXh0bgNhZW0CMTEAAaeGqOrGvAWiggXYPpWpVhG4KIC6Ecg2X10e7rmjCJ2DsDxmjEzH2fn8_n9D8w_aem_khcKTbCMwKBH7bWlA6JYUA",
     crowdfunding: "https://www.example.com/crowdfunding"

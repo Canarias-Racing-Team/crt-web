@@ -49,8 +49,11 @@ export type NotionPageType = {
 export type ImageEntry = {
   file: string;
   alt: string;
+  name?: string;
   featured: boolean;
   src: ImageData;
+  invert?: boolean;
+  scale?: string | number;
 };
 
 export type SupporterItem = {
@@ -62,6 +65,7 @@ export type SupporterItem = {
   alt?: string;
   size?: "small" | "medium" | "large" | number;
   priority?: number;
+  invert?: boolean;
 };
 
 export type SupportersProps = {

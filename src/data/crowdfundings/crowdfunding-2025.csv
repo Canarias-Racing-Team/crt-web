@@ -1,4 +1,4 @@
-name,type,url,logo,size,priority,noFilter
+name,type,url,logo,size,priority,invert
 Minerva Sanza Rodriguez,text,,,small,
 D M,text,,,small,
 May Benitez,text,,,small,
@@ -35,7 +35,7 @@ Ibai ,text,,,medium,1
 Rubens Salazar,text,,,large,
 Jose,text,,,large,1
 Ingrid Morales,text,,,large,1
-Marrero Vidrio y Arquitectura,logo,https://mvya.es/,https://mvya.es/wp-content/uploads/2023/09/logo-first-section-cristaleriamarrero.png,medium,1,true
+Marrero Vidrio y Arquitectura,logo,https://mvya.es/,https://mvya.es/wp-content/uploads/2023/09/logo-first-section-cristaleriamarrero.png,medium,1,false
 Big Data Renovables,logo,https://bigerodata.com/,https://bigerodata.com/wp-content/uploads/2023/05/cropped-Bigerologoazu-1.png,medium,2
 Autoescuela la Gallega,logo,https://aelagallega.es/,https://aelagallega.es/.cm4all/iproc.php/logo%20-%20copia1.png/scale_0_0/logo%20-%20copia1.png,medium,
 Maica Centro Médico estético,logo,https://maicacentromedicoestetico.com/,https://maicacentromedicoestetico.com/wp-content/uploads/2025/04/LOGOTIPO-MAICA-CENTRO-ESTETICO-MEDICO-COLOR.png,medium,
