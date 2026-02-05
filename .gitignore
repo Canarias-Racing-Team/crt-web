@@ -1,7 +1,6 @@
 # build output
 dist/
 .vercel/
-package-lock.json
 
 # generated types
 .astro/

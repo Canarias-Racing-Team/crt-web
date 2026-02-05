@@ -52,3 +52,22 @@ export type ImageEntry = {
   featured: boolean;
   src: ImageData;
 };
+
+export type SupporterItem = {
+  id: string;
+  type?: "logo" | "text";
+  name?: string;
+  url?: string;
+  logo?: ImageData | string;
+  alt?: string;
+  size?: "small" | "medium" | "large" | number;
+  priority?: number;
+};
+
+export type SupportersProps = {
+  items: SupporterItem[];
+  className?: string;
+  layout?: "grid" | "wrap" | "carousel";
+  columns?: { sm?: number; md?: number; lg?: number };
+  showNames?: boolean;
+};

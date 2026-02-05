@@ -7,6 +7,7 @@
 ![Notion](https://img.shields.io/badge/CMS-Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 [![Vercel Deploy](https://deploy-badge.vercel.app/vercel/tomas2p?style=for-the-badge&name=Status)](https://vercel.com/tomas2ps-projects/crteam-web)
+[![Bun](https://img.shields.io/badge/Runtime-Bun-000000?style=for-the-badge&logo=bun&logoColor=white)](https://bun.sh/)
 
 Sitio web oficial del primer equipo de Fórmula Student de Canarias.  
 Desarrollado con **Astro**, **TailwindCSS** y **DaisyUI**. Incluye sistema de noticias conectado a **Notion** como CMS y diseño completamente responsive optimizado para todos los dispositivos.

@@ -12,6 +12,7 @@
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
+      "@data/*": ["src/data/*"],
       "@types": ["src/types"]
     }
   }
