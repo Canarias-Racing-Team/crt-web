@@ -4,21 +4,23 @@
 ![Astro](https://img.shields.io/badge/Built_with-Astro-0f172a?style=for-the-badge&logo=astro&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Styled_with-TailwindCSS-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![DaisyUI](https://img.shields.io/badge/UI-DaisyUI-5a0fc8?style=for-the-badge&logo=daisyui&logoColor=white)
-![Notion](https://img.shields.io/badge/CMS-Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
+![Content Collections](https://img.shields.io/badge/Content-Astro%20Collections-0ea5a4?style=for-the-badge&logo=astro&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 [![Vercel Deploy](https://deploy-badge.vercel.app/vercel/tomas2p?style=for-the-badge&name=Status)](https://vercel.com/tomas2ps-projects/crteam-web)
 [![Bun](https://img.shields.io/badge/Runtime-Bun-000000?style=for-the-badge&logo=bun&logoColor=white)](https://bun.sh/)
 
 Sitio web oficial del primer equipo de Fórmula Student de Canarias.  
-Desarrollado con **Astro**, **TailwindCSS** y **DaisyUI**. Incluye sistema de noticias conectado a **Notion** como CMS y diseño completamente responsive optimizado para todos los dispositivos.
+Desarrollado con **Astro**, **TailwindCSS** y **DaisyUI**. El sistema de noticias ahora usa las **Content Collections** de Astro (Markdown con frontmatter) y está completamente integrado con el build de Astro.
 
 ## 💡 Desarrollo
 
 ### Configuración .env
 
+No se requiere una integración externa para las noticias. Si su proyecto usa variables de entorno para otras integraciones, añádalas aquí. Ejemplo:
+
 ```env
-NOTION_API_KEY=
-NOTION_DATABASE_ID=
+# Ejemplo de variables de entorno (si aplica)
+# SITE_URL=https://crteam.es
 ```
 
 ### ⚠️ Advertencia de seguridad
@@ -40,7 +42,6 @@ npm install        # Instalar dependencias
 npm run dev        # Servidor de desarrollo
 npm run build      # Construir para producción
 npm run preview    # Previsualizar build
-npm run download-news-images # Descargar imágenes de noticias desde Notion
 ```
 
 ### Tecnologías
@@ -49,7 +50,7 @@ npm run download-news-images # Descargar imágenes de noticias desde Notion
 - **TailwindCSS**: Estilos optimizados para producción
 - **DaisyUI**: Componentes UI modernos
 - **TypeScript**: Tipado estático robusto
-- **Notion**: CMS dinámico para noticias
+-- **Content Collections**: Noticias y posts en `src/content/news/` (Markdown + frontmatter)
 - **Vercel**: Despliegue y hosting
 - **Poppins & Inter**: Fuentes modernas optimizadas
 
@@ -59,7 +60,7 @@ npm run download-news-images # Descargar imágenes de noticias desde Notion
 
 - [x] **Infraestructura base**: Configuración completa de Astro + Vercel
 - [x] **Componentes principales**: Hero, Navbar, Footer, Gallery, Cards, etc.
-- [x] **Sistema de noticias**: Integración dinámica con Notion CMS
+- [x] **Sistema de noticias**: Migrado a Content Collections (Markdown en `src/content/news/`)
 - [x] **Diseño responsive**: Optimizado para móvil, tablet y desktop
 - [x] **Tipografía moderna**: Fuentes Poppins e Inter optimizadas
 - [x] **Galería de partners**: Sistema automático de logos destacados

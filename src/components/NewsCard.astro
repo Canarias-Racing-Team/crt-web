@@ -10,9 +10,17 @@ interface Props {
   short?: boolean;
   className?: string;
   index?: number;
+  Content?: any;
 }
 
-const { noticia, short, link, className = "", index = 0 } = Astro.props;
+const {
+  noticia,
+  short,
+  link,
+  className = "",
+  index = 0,
+  Content,
+} = Astro.props;
 ---
 
 <div
@@ -45,42 +53,43 @@ const { noticia, short, link, className = "", index = 0 } = Astro.props;
       {noticia.Nombre}
     </h2>
 
-    {
-      noticia.Contenido &&
-        (short && noticia.Contenido.length > 200
-          ? `${noticia.Contenido.slice(0, 200)}...`
-          : noticia.Contenido
+    <div class="card-content flex flex-col gap-2">
+      {
+        Content ? (
+          <Content />
+        ) : noticia.Contenido ? (
+          noticia.Contenido.substring(0, 160) + "..."
+        ) : (
+          "Noticia del Canarias Racing Team"
         )
-          .split("\n")
-          .filter((line) => line.trim() !== "")
-          .map((line) => <p class="text-base-content/80">{line}</p>)
-    }
+      }
+    </div>
 
     <slot />
     <div class="card-actions justify-between place-items-center">
-      <div class="flex flex-col gap-1">
-        {
-          noticia.Autor && (
-            <div class="badge badge-soft">
-              <Icon name="mdi:account" class="size-[1em] mr-1" />
-              {noticia.Autor}
-            </div>
-          )
-        }
+      {
+        short ? (
+          <div class="flex flex-col gap-1">
+            {noticia.Autor && (
+              <div class="badge badge-soft">
+                <Icon name="mdi:account" class="size-[1em] mr-1" />
+                {noticia.Autor}
+              </div>
+            )}
 
-        {
-          noticia.Fecha && (
-            <div class="badge badge-soft">
-              <Icon name="mdi:calendar" class="size-[1em] mr-1" />
-              {new Date(noticia.Fecha).toLocaleDateString("es-ES", {
-                year: "numeric",
-                month: short ? "short" : "long",
-                day: "numeric",
-              })}
-            </div>
-          )
-        }
-      </div>
+            {noticia.Fecha && (
+              <div class="badge badge-soft">
+                <Icon name="mdi:calendar" class="size-[1em] mr-1" />
+                {new Date(noticia.Fecha).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: short ? "short" : "long",
+                  day: "numeric",
+                })}
+              </div>
+            )}
+          </div>
+        ): null
+      }
 
       {
         link && (

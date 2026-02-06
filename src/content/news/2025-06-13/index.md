@@ -1,0 +1,12 @@
+---
+title: "Suardiaz trasladará el monoplaza de Canarias Racing Team hasta la Formula Student Spain"
+published: true
+date: 2025-06-13
+image: "/src/content/news/2025-06-13/cover.png"
+author: "Selene Gila"
+---
+El equipo automovilístico de la Universidad de La Laguna, Canarias Racing Team (CRT), contará con el respaldo logístico de la empresa Vapores Suardiaz Sur Atlántico S.L. para trasladar su monoplaza eléctrico de competición al Circuit de Barcelona-Catalunya en el marco de la Formula Student Spain 2025.  
+
+Un buque del grupo Suardiaz zarpará con el monoplaza el próximo 28 de julio desde el Puerto de Santa Cruz de Tenerife rumbo a Cataluña. Su llegada al Puerto de Barcelona está prevista para el 1 de agosto y posteriormente, el monoplaza será transportado por los estudiantes hasta el circuito. La Formula Student Spain tendrá lugar del 4 al 10 de agosto, pero Tenesera, nombre con el que el equipo ha bautizado a su vehículo, no regresará a Tenerife hasta el 26 de septiembre. Su partida desde Barcelona también queda en manos de la empresa de logística, patrocinador oficial de CRT. 
+
+La colaboración entre Canarias Racing Team y Suardiaz marca un paso estratégico en la proyección internacional de la ingeniería desarrollada en el Archipiélago. Esta alianza se consolida como un puente entre la innovación universitaria y el desarrollo económico autonómico.

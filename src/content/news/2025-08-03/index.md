@@ -1,0 +1,12 @@
+---
+title: "Canarias Racing Team competirá en la FSS 2025"
+published: true
+date: 2025-08-03
+image: "/src/content/news/2025-08-03/cover.jpg"
+author: "Selene Gila"
+---
+Canarias Racing Team (CRT), el equipo automovilístico de la Universidad de La Laguna, participará del 4 al 11 de agosto en la Fórmula Student Spain (FSS), una contienda que pertenece a la categoría competitiva más prestigiosa del mundo del motor a nivel estudiantil. El evento tendrá lugar en el Circuito de Montmeló, Cataluña y contará con la presencia de 80 equipos.
+
+Los estudiantes de la Universidad de La Laguna lograron clasificarse en la FSS tras ofrecer un desempeño positivo en los exámenes de acceso, realizados el pasado 31 de enero. En estas pruebas el alumnado demostró su conocimiento teórico-práctico al responder preguntas sobre la normativa de la competición y solucionar problemas de índole ingenieril. En esta edición de la Formula Student, el grupo interdisciplinar de alumnos presentará a Tenesera, el vehículo eléctrico que han manufacturado íntegramente a lo largo del curso académico. El alcance internacional de la Fórmula Student motiva que el equipo de la ULL se enfrente a universidades de toda España y de todo el mundo. Los distintos grupos deberán volver a pasar por distintas pruebas divididas en dos grandes categorías: las pruebas dinámicas y las pruebas estáticas. Estos ejercicios serán evaluados por un jurado profesional compuesto por expertos de reconocido prestigio, entre los que se encuentran ingenieros vinculados a la empresa Nissan y a la Formula 1.
+
+Las pruebas dinámicas se basan mayoritariamente en la aceleración y en la resistencia, mientras que las pruebas estáticas sirven para valorar la viabilidad del proyecto. Las primeras incluyen: el Skidpad, el Acceleration y el Endurance; y las segundas el Business Plan, el Cost & Manufacturing y el Engineering Design. Con su participación en la Formula Student Spain 2025, Canarias Racing Team reafirma el compromiso de la Universidad de La Laguna con la formación práctica, la innovación y la proyección internacional del talento canario. Gracias a esta institución matriz, a los patrocinadores del equipo y a los donantes del crowdfunding, el alumnado podrá sufragar la mayoría de gastos de la competición.

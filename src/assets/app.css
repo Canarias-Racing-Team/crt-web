@@ -168,6 +168,12 @@ p {
   /* Ajusta según la altura real del navbar */
 }
 
+.md\.sticky {
+  position: sticky;
+  top: 15rem;
+  /* Ajusta según la altura real del navbar */
+}
+
 /* Para "ISLAS" */
 .text-outline-white {
   color: transparent;

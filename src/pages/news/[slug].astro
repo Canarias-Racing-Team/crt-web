@@ -3,38 +3,74 @@ import NewsCard from "@components/NewsCard.astro";
 import Layout from "@layouts/Layout.astro";
 import Section from "@components/Section.astro";
 import Card from "@components/Card.astro";
-import { getNotionPages } from "@utils/notion";
 import { texts } from "@utils/texts";
 import { createCardContent } from "@utils/texts";
 import { getLocalNewsImage } from "@utils/imageUtils";
+import { getCollection, render } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 export const prerender = true;
 
-// Generación de rutas estáticas para cada noticia
+// Generación de rutas estáticas para cada noticia (usar frontmatter.slug o id)
 export async function getStaticPaths() {
-  try {
-    const pages = await getNotionPages();
-    return pages
-      .filter((page) => !!page.url)
-      .map((page) => ({
-        params: { slug: page.url },
-        props: { noticia: page },
-      }));
-  } catch (error) {
-    console.error("Error al obtener páginas de Notion:", error);
-    return [];
-  }
+  const entries = await getCollection("news");
+  return entries.map((e) => ({ params: { slug: e.data?.slug ?? e.id } }));
 }
 
-const { noticia } = Astro.props;
+const { slug } = Astro.params;
 
-if (!noticia) {
-  return Astro.redirect("/news");
-}
+const entries = await getCollection("news");
+const entry = entries.find((e) => (e.data?.slug ?? e.id) === slug);
+if (!entry) return Astro.redirect("/news");
+
+const noticia = {
+  Publicado: entry.data?.published ?? true,
+  Contenido: typeof (entry as any).body === "string" ? (entry as any).body : "",
+  Fecha: entry.data?.date
+    ? new Date(entry.data.date).toISOString()
+    : new Date().toISOString(),
+  Imagen: entry.data?.image ?? "",
+  url: entry.data?.slug ?? entry.id,
+  Nombre: entry.data?.title ?? entry.id,
+  Autor: entry.data?.author ?? "",
+};
 
 // Sobrescribir con la imagen local si está disponible
+// Normalizar fuente de imagen: puede venir como string (nombre de archivo),
+// como ruta con prefijo `/`, o como objeto (p.ej. image() de collections).
+function normalizeImage(value: any) {
+  if (!value) return "";
+  if (typeof value === "string") {
+    return value.startsWith("/") || value.startsWith("http")
+      ? value
+      : `/${value}`;
+  }
+  if (typeof value === "object") {
+    // image() helper devuelve un objeto con `src`
+    return value.src ?? "";
+  }
+  return "";
+}
+
+noticia.Imagen = normalizeImage(noticia.Imagen);
+
+// Intentar resolver imágenes dentro de `src/assets` para pasar el módulo importado
+const _assetImages = import.meta.glob("/src/assets/**/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+});
+function resolveAssetImage(value: any) {
+  if (!value) return null;
+  const name = value.split("/").pop();
+  for (const [p, m] of Object.entries(_assetImages)) {
+    if (p.endsWith("/" + name) || p === value) return (m as any).default;
+  }
+  return null;
+}
+
 const localImage = getLocalNewsImage(noticia.url);
-noticia.Imagen = localImage || noticia.Imagen || "/og-image-3_4.png";
+const assetImage = resolveAssetImage(noticia.Imagen);
+noticia.Imagen =
+  localImage || assetImage || noticia.Imagen || "/og-image-3_4.png";
 
 // Datos para SEO de artículo
 const articleTitle = noticia.Nombre || "Noticia";
@@ -43,9 +79,14 @@ const articleDescription =
   "Noticia del Canarias Racing Team";
 const articleImage = noticia.Imagen;
 const articlePath = `/news/${noticia.url}`;
-const publishedDate = noticia.Fecha
-  ? new Date(noticia.Fecha).toISOString()
-  : new Date().toISOString();
+const publishedDate = noticia.Fecha;
+
+// Fecha formateada para mostrar en la UI
+const formattedDate = new Date(noticia.Fecha).toLocaleDateString("es-ES", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+});
 
 // Tags relacionados con Formula Student y automovilismo
 const articleTags = [
@@ -56,6 +97,8 @@ const articleTags = [
   "Monoplaza Eléctrico",
   "Competición Universitaria",
 ];
+
+const { Content } = await render(entry as any);
 ---
 
 <Layout
@@ -74,7 +117,7 @@ const articleTags = [
   <Section id="noticia-individual" className="py-15 gap-4">
     <aside
       id="titles"
-      class="w-full lg:w-1/3 flex flex-col gap-4 lg:sticky lg:self-start lg:h-fit lg:top-25"
+      class="w-full lg:w-1/3 flex flex-col gap-4 md:sticky md:self-start md:h-fit md:top-15"
     >
       <Card
         content={createCardContent(texts.newsDetails.aboutTeam)}
@@ -86,9 +129,29 @@ const articleTags = [
           },
         ]}
       />
+
+      <div class="flex flex-row flex-wrap gap-2">
+        {
+          noticia.Fecha && (
+            <div class="badge bg-base-300 badge-lg">
+              <Icon name="mdi:calendar" class="size-[1em] mr-1" />
+              {formattedDate}
+            </div>
+          )
+        }
+        {
+          noticia.Autor && (
+            <div class="badge bg-base-300 badge-lg">
+              <Icon name="mdi:account" class="size-[1em] mr-1" />
+              {noticia.Autor}
+            </div>
+          )
+        }
+      </div>
     </aside>
+
     <div class="w-full lg:w-2/3">
-      <NewsCard noticia={noticia} />
+      <NewsCard noticia={noticia} Content={Content} />
     </div>
   </Section>
 </Layout>
