@@ -17,11 +17,24 @@ const buttonList = Array.isArray(buttons) ? buttons : [buttons];
       class={`flex gap-2 ${vertical ? "flex-col" : "flex-row"} ${className}`}
     >
       {buttonList.map(
-        (
-          { text, href, icon, buttonClass: itemButtonClass },
-          index,
-        ) => {
+        ({ text, href, icon, buttonClass: itemButtonClass }, index) => {
           const cls = (itemButtonClass || buttonClass).trim();
+
+          if (href) {
+            return (
+              <a
+                id={`button-${index}`}
+                href={href}
+                class={`${cls} whitespace-normal inline-flex`}
+                aria-label={text}
+              >
+                <div class="flex flex-wrap items-center gap-2 justify-center">
+                  {icon && <Icon name={icon} class="h-5 w-5 flex-shrink-0" />}
+                  <span class="break-words text-center">{text}</span>
+                </div>
+              </a>
+            );
+          }
 
           return (
             <button
