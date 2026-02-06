@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 const {
   buttons,
   className = "",
+  classBody = "",
   content = [],
   buttonsVertical = false,
   image,
@@ -34,7 +35,7 @@ const {
       </figure>
     )
   }
-  <div class={`card-body w-full h-full p-4 md:p-6`}>
+  <div class={`card-body w-full h-full p-4 md:p-6 ${classBody}`}>
     {
       content.length > 0 &&
         content.map((item: any, index: number) => {

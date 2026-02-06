@@ -2,9 +2,11 @@
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import logoCRT from "@assets/fotos/logos-crteam/CRT BLANCO.png";
-import { getNotionPages } from "@utils/notion";
+import { getCollection } from "astro:content";
 
-const newsCount = (await getNotionPages()).length;
+const newsCount = (await getCollection("news")).filter(
+  (e) => (e.data?.published ?? true) === true,
+).length;
 const newsCountSpan = newsCount > 99 ? "99+" : newsCount.toString();
 const currentPath = new URL(Astro.request.url).pathname;
 const navItems = [
@@ -47,7 +49,7 @@ const navItems = [
       function setNavbarStyle() {
         Object.assign(
           navbar.style,
-          window.scrollY > 10 ? scrolled : transparent
+          window.scrollY > 10 ? scrolled : transparent,
         );
       }
       window.addEventListener("scroll", setNavbarStyle, { passive: true });
@@ -215,7 +217,7 @@ const navItems = [
       const anchorTabs = document.querySelectorAll("[data-anchor]");
       if (anchorTabs.length) {
         const anchors = Array.from(anchorTabs).map((tab) =>
-          tab.getAttribute("data-anchor")
+          tab.getAttribute("data-anchor"),
         );
         const sections = anchors
           .map((id) => document.getElementById(id))
@@ -296,7 +298,7 @@ const navItems = [
         mobileMenuOverlay.addEventListener("click", closeMobileMenu);
         mobileMenu.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", () =>
-            setTimeout(closeMobileMenu, 100)
+            setTimeout(closeMobileMenu, 100),
           );
         });
       }

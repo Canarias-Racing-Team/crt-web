@@ -37,6 +37,7 @@ export type SectionSampleLinkType = {
 export type NotionPageType = {
   Publicado: boolean;
   Contenido: string;
+  ContenidoHTML?: string;
   Fecha: string;
   Imagen?: string;
   url: string;

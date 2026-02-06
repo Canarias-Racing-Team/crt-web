@@ -85,7 +85,7 @@ const { title, description, path, image } = Astro.props;
           function (e) {
             startY = e.touches[0].pageY;
           },
-          { passive: false }
+          { passive: false },
         );
 
         document.addEventListener(
@@ -111,7 +111,7 @@ const { title, description, path, image } = Astro.props;
               e.preventDefault();
             }
           },
-          { passive: false }
+          { passive: false },
         );
       }
 
