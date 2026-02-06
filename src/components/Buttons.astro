@@ -14,19 +14,30 @@ const buttonList = Array.isArray(buttons) ? buttons : [buttons];
 {
   buttons && (
     <div
-      class={`flex gap-2 flex-col ${vertical ? "md:flex-col" : "md:flex-row"} ${className}`}
+      class={`flex gap-2 ${vertical ? "flex-col" : "flex-row"} ${className}`}
     >
-      {buttonList.map(({ text, href, icon }, index) => (
-        <a
-          href={href}
-          class={buttonClass}
-          id={`button-${index}`}
-          aria-label={text}
-        >
-          {icon && <Icon name={icon} class="h-5 w-5 mr-2" />}
-          {text}
-        </a>
-      ))}
+      {buttonList.map(
+        (
+          { text, href, icon, buttonClass: itemButtonClass },
+          index,
+        ) => {
+          const cls = (itemButtonClass || buttonClass).trim();
+
+          return (
+            <button
+              id={`button-${index}`}
+              class={`${cls} whitespace-normal inline-flex`}
+              aria-label={text}
+              type="button"
+            >
+              <div class="flex flex-wrap items-center gap-2 justify-center">
+                {icon && <Icon name={icon} class="h-5 w-5 flex-shrink-0" />}
+                <span class="break-words text-center">{text}</span>
+              </div>
+            </button>
+          );
+        },
+      )}
     </div>
   )
 }

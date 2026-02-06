@@ -49,6 +49,30 @@ export type NotionPageType = {
 export type ImageEntry = {
   file: string;
   alt: string;
+  name?: string;
   featured: boolean;
   src: ImageData;
+  invert?: boolean;
+  scale?: string | number;
+  href?: string;
+};
+
+export type SupporterItem = {
+  id: string;
+  type?: "logo" | "text";
+  name?: string;
+  url?: string;
+  logo?: ImageData | string;
+  alt?: string;
+  size?: "small" | "medium" | "large" | number;
+  priority?: number;
+  invert?: boolean;
+};
+
+export type SupportersProps = {
+  items: SupporterItem[];
+  className?: string;
+  layout?: "grid" | "wrap" | "carousel";
+  columns?: { sm?: number; md?: number; lg?: number };
+  showNames?: boolean;
 };

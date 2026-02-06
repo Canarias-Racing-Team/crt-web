@@ -3,11 +3,13 @@ export const texts = {
   // Enlaces de redes sociales
   links: {
     instagram: "https://www.instagram.com/canariasracingteam/",
-    linkedin: "https://www.linkedin.com/company/canariasracingteam/",
+    linkedin: "https://www.linkedin.com/company/canarias-racing-team/",
     dossier: "/dossieres/dossier_crt_25-26.pdf",
     wallpapers: "/crteam-wallpapers.zip",
+    contact: "mailto:crteam@ull.edu.es",
     // Formulario de inscripción al equipo
-    joinUs: "https://docs.google.com/forms/d/e/1FAIpQLSfRk5ihl_rh55yh7abRbm05h9jfGZc3mQtAMFY83TTa19v6XA/viewform?fbclid=PAZXh0bgNhZW0CMTEAAaeGqOrGvAWiggXYPpWpVhG4KIC6Ecg2X10e7rmjCJ2DsDxmjEzH2fn8_n9D8w_aem_khcKTbCMwKBH7bWlA6JYUA"
+    joinUs: "https://docs.google.com/forms/d/e/1FAIpQLSfRk5ihl_rh55yh7abRbm05h9jfGZc3mQtAMFY83TTa19v6XA/viewform?fbclid=PAZXh0bgNhZW0CMTEAAaeGqOrGvAWiggXYPpWpVhG4KIC6Ecg2X10e7rmjCJ2DsDxmjEzH2fn8_n9D8w_aem_khcKTbCMwKBH7bWlA6JYUA",
+    crowdfunding: "https://www.example.com/crowdfunding"
   },
   // Textos de la página de noticias
   news: {
@@ -52,6 +54,14 @@ export const texts = {
       paragraphs: [
         "Tu apoyo es fundamental para que este proyecto siga rodando. Como patrocinador o colaborador podrás formar parte de una iniciativa que fomenta el desarrollo tecnológico y automotriz.",
         "Contacta con nosotros, síguenos en redes y vibra junto a nosotros en cada carrera. Juntos llevamos el talento canario a lo más alto.",
+      ],
+    },
+    crowdfunding: {
+      title: "Apoya nuestro proyecto",
+      subtitle: "Haz tu aportación al crowdfunding",
+      paragraphs: [
+        "Con tu ayuda, podemos seguir desarrollando nuestro monoplaza eléctrico y competir a nivel internacional. Cada contribución, por pequeña que sea, nos acerca más a la meta de representar a Canarias en la Formula Student.",
+        "¡Únete a nuestra comunidad de patrocinadores y sé parte de esta emocionante aventura automovilística!",
       ],
     },
   },

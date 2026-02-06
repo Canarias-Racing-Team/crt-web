@@ -9,9 +9,12 @@ import Section from "@components/Section.astro";
 import Stats from "@components/Stats.astro";
 import { loadImageEntries } from "@utils/imageUtils";
 import { texts, createCardContent } from "@utils/texts";
-import carComponentsData from "@assets/carComponents.json";
+import carComponentsData from "@data/carComponents.json";
 import CarCardsMenu from "@/components/CarCardsMenu.astro";
 import type { ImageEntry } from "@types";
+import Supporters from "@components/Supporters.astro";
+import type { SupporterItem } from "@types";
+import { loadSupportersByYear } from "@utils/supporters";
 
 export const prerender = true;
 
@@ -21,6 +24,11 @@ let partners: ImageEntry[] = [];
 let mainPartners: ImageEntry[] = [];
 let teamPictures: ImageEntry[] = [];
 let carComponents: any[] = [];
+let supporters: SupporterItem[] = [];
+let campaigns: Array<{ year: string; items: SupporterItem[] }> = [];
+let years: string[] = [];
+let latestYear: string | undefined = undefined;
+let selectedYear: string | undefined = undefined;
 
 try {
   // Carga las imagenes del equipo
@@ -36,16 +44,33 @@ try {
   partners = [
     ...mainPartners,
     ...partners.filter(
-      (p) => !new Set(mainPartners.map((p) => p.file)).has(p.file)
+      (p) => !new Set(mainPartners.map((p) => p.file)).has(p.file),
     ),
   ];
+
+  // Cargar mecenas desde todos los CSV por año (SSR)
+  campaigns = (await loadSupportersByYear()) || [];
+  years = campaigns.map((c) => c.year).sort((a, b) => Number(b) - Number(a));
+  latestYear = years[0];
+  selectedYear = latestYear;
+  try {
+    const reqUrl = new URL(Astro.request.url);
+    const q = reqUrl.searchParams.get("year");
+    if (q) selectedYear = q;
+  } catch (e) {
+    // ignore
+  }
+  const currentCampaign =
+    campaigns.find((c) => c.year === selectedYear) ||
+    (campaigns.length > 0 ? campaigns[0] : { year: selectedYear, items: [] });
+  supporters = currentCampaign.items || [];
 
   // Carga las imágenes de componentes del coche
   const carComponentFiles = carComponentsData
     .map((c) =>
       typeof c.src === "string" && !c.src.startsWith("http")
         ? c.src.split("/").pop()
-        : null
+        : null,
     )
     .filter(Boolean) as string[];
   const carComponentImages =
@@ -59,7 +84,7 @@ try {
       !component.src.startsWith("http")
     ) {
       const img = carComponentImages.find(
-        (img) => img.file === component.src.split("/").pop()
+        (img) => img.file === component.src.split("/").pop(),
       );
       return {
         ...component,
@@ -71,13 +96,14 @@ try {
   });
 
   console.log(
-    `Image loading status:`,
+    `Data loading status:`,
     [
       `${partners.length > 0 ? "✅" : "❌"} ${partners.length} partners`,
       `${mainPartners.length > 0 ? "✅" : "❌"} ${mainPartners.length} mainPartners`,
       `${teamPictures.length > 0 ? "✅" : "❌"} ${teamPictures.length} teamPictures`,
+      `${supporters.length > 0 ? "✅" : "❌"} ${supporters.length} supporters`,
       `${carComponentImages.length > 0 ? "✅" : "❌"} ${carComponentImages.length} carComponents`,
-    ].join(", ")
+    ].join(", "),
   );
   // Log para depuración de los src de las imágenes del carrusel de equipo
   // teamPictures.forEach((img, i) => {
@@ -171,5 +197,61 @@ try {
         },
       ]}
     />
+  </Section>
+
+  <Section id="crowdfunding">
+    <Card
+      className="w-full lg:w-1/3"
+      content={createCardContent(texts.home.crowdfunding)}
+      buttons={[
+        {
+          text: "Colabora (Próximamente)",
+          buttonClass: "btn btn-disabled",
+          href: texts.links.crowdfunding,
+          icon: "mdi:hand-heart",
+        },
+      ]}
+    />
+    <div class="w-full lg:w-2/3">
+      <nav class="mb-4 flex flex-row gap-0 flex-wrap join join-sm menu bg-base-300 rounded-box" aria-label="Selector de año de campaña de crowdfunding">
+        {
+          years.reverse().map((y: string) => (
+            <a
+              class={`js-year-link p-2 rounded-lg ${y === (selectedYear || years[0]) ? "text-primary" : ""}`}
+              href={`?year=${y}`}
+              data-year={y}
+              aria-current={
+                y === (selectedYear || years[0]) ? "page" : undefined
+              }
+            >
+              {y}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Contenedor visible donde se mostrará la plantilla del año seleccionado -->
+      <div
+        id="supporters-container"
+        class="w-full max-h-full"
+        data-selected-year={selectedYear || ""}
+      >
+        <Supporters items={supporters} className="w-full max-h-full" />
+      </div>
+
+      <!-- Plantillas pre-renderizadas por año (ocultas) -->
+      {
+        years.map((y: string) => {
+          const c = campaigns.find((cc) => cc.year === y) || { items: [] };
+          return (
+            <template id={`tmpl-supporters-${y}`}>
+              <Supporters items={c.items} className="w-full" />
+            </template>
+          );
+        })
+      }
+
+      <script is:inline src="/js/crowdfunding-switcher.js" defer></script>
+    </div>
   </Section>
 </Layout>

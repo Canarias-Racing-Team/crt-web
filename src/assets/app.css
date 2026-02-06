@@ -133,6 +133,17 @@ h6,
   background-color: color-mix(in oklab, var(--color-base-100) 0%, transparent);
 }
 
+.size-full {
+  width: 100%;
+  height: auto;
+}
+
+.place-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .stat {
   overflow: hidden;
   width: fit-content;
@@ -249,4 +260,42 @@ p {
   background: transparent;
   color: var(--color-primary);
   border: 1.5px solid var(--color-primary);
+}
+
+/* Helpers para Supporters component */
+.supporters {
+  align-items: center;
+}
+
+.supporter {
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.supporter:hover {
+  transform: translateY(-3px);
+}
+
+.supporter .text-sm {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Allow supporter names to wrap even if .text-sm is present */
+.supporter .supporter-name {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.supporter--small {
+  height: 32px;
+}
+
+.supporter--medium {
+  height: 48px;
+}
+
+.supporter--large {
+  height: 80px;
 }

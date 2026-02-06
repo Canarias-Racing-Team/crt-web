@@ -1,0 +1,113 @@
+---
+import type { SupporterItem } from "@types";
+import Gallery from "./Gallery.astro";
+
+const { items = [], className = "" } = Astro.props as {
+  items?: SupporterItem[];
+  className?: string;
+};
+
+const sizeMap = {
+  small: { wrapper: "min-h-8 flex", img: "max-h-5", text: "text-xs", rank: 1 },
+  medium: {
+    wrapper: "min-h-12 flex",
+    img: "max-h-8",
+    text: "text-md",
+    rank: 2,
+  },
+  large: {
+    wrapper: "min-h-17 flex",
+    img: "max-h-12",
+    text: "text-lg md:text-xl",
+    rank: 3,
+  },
+};
+
+function getSizeProps(size: keyof typeof sizeMap | number) {
+  if (typeof size === "number") {
+    return {
+      wrapper: `min-h-[${size}px] flex`,
+      img: `max-h-[${size}px]`,
+      text: "text-base",
+      rank: 2,
+    };
+  }
+  return sizeMap[size] || sizeMap.medium;
+}
+
+const resolvedItems = (items ?? [])
+  .map((item) => ({
+    ...item,
+    logo: item.logo,
+    priority: item.priority != null ? Number(item.priority) : undefined,
+    sizeProps: getSizeProps(item.size ?? "medium"),
+  }))
+  .sort((a, b) => {
+    if (!!a.logo !== !!b.logo) return a.logo ? -1 : 1;
+    if (b.sizeProps.rank !== a.sizeProps.rank)
+      return b.sizeProps.rank - a.sizeProps.rank;
+    const pa = a.priority ?? Infinity,
+      pb = b.priority ?? Infinity;
+    if (pa !== pb) return pa - pb;
+    return (a.name ?? "").localeCompare(b.name ?? "");
+  });
+
+const groups = (["large", "medium", "small"] as (keyof typeof sizeMap)[]).map(
+  (key) => ({
+    key,
+    items: resolvedItems.filter(
+      (i) => i.sizeProps.rank === sizeMap[key].rank && !i.logo && i.name,
+    ),
+  }),
+);
+---
+
+<div class={`${className} max-h-full supporters flex flex-col place-center gap-6 justify-between`}>
+  <Gallery
+    items={resolvedItems
+      .filter((item) => item.logo)
+      .map((item) => ({
+        src: item.logo,
+        alt: item.alt ?? item.name ?? "",
+        invert: item.invert,
+        scale: "max-w-[75%] max-h-[75%]",
+        href: item.url,
+      }))}
+    alt="Logos de los patrocinadores"
+    className="w-full h-full max-h-full"
+  />
+  <div id="names" class="names flex flex-col gap-4 place-center w-full max-h-full">
+    {
+      groups.map(({ key, items }) =>
+        items.length ? (
+          <div
+            class={`supporter-size-row ${key} flex flex-wrap gap-x-2 md:gap-x-4 gap-y-0 place-center`}
+          >
+            {items.map((item) => (
+              <div class="supporter-name-row flex-shrink-0">
+                {item.url ? (
+                  <a
+                    href={item.url}
+                    target={item.url.startsWith("http") ? "_blank" : "_self"}
+                    rel={
+                      item.url.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    class={`${item.sizeProps.text} font-medium`}
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <div class={`${item.sizeProps.text} font-medium`}>
+                    {item.name}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : null,
+      )
+    }
+  </div>
+</div>
