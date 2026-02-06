@@ -8,7 +8,12 @@ import Card from "@components/Card.astro";
 import { texts, createCardContent } from "@utils/texts";
 import { getLocalNewsImage } from "@utils/imageUtils";
 
-export const prerender = false;
+export const prerender = true;
+
+// Genera la ruta estática para la página de noticias
+export async function getStaticPaths() {
+  return [{ params: { page: undefined } }];
+}
 
 const entries = await getCollection("news");
 const noticiasRaw: NotionPageType[] = entries
