@@ -35,6 +35,24 @@ const navItems = [
     // Navbar background blur/opaque on scroll
     document.addEventListener("DOMContentLoaded", () => {
       const navbar = document.getElementById("navbar");
+
+      // Expose navbar height as a CSS variable so other components (eg. Hero)
+      // can reserve space and avoid content being overlapped by the fixed navbar.
+      function setNavbarHeight() {
+        if (!navbar) return;
+        const h = navbar.getBoundingClientRect().height || 64;
+        document.documentElement.style.setProperty("--navbar-height", `${h}px`);
+      }
+
+      // Initial set and keep updated on resize/changes
+      setNavbarHeight();
+      window.addEventListener("resize", setNavbarHeight);
+      // If the navbar's size changes (responsive), observe it
+      if (window.ResizeObserver && navbar) {
+        const roNav = new ResizeObserver(() => setNavbarHeight());
+        roNav.observe(navbar);
+      }
+
       const scrolled = {
         backgroundColor: "hsl(var(--b1) / 0.9)",
         backdropFilter: "blur(8px)",

@@ -17,8 +17,12 @@ const buttons = [
 ---
 
 <section
-  class="hero min-h-screen relative flex flex-col items-center justify-center text-center text-neutral-content"
+  class="hero relative flex flex-col items-center justify-center text-center text-neutral-content"
   style={`
+    /* Use dynamic viewport unit set in Layout to avoid mobile chrome 100vh issues */
+    min-height: calc(var(--vh, 1vh) * 100);
+    /* Reserve space for fixed navbar (set by Navbar) */
+    padding-top: var(--navbar-height, 4rem);
     background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 80%), url('${helmetBg.src}');
     background-size: cover;
     background-position: center;
