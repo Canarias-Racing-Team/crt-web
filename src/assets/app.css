@@ -8,8 +8,9 @@ body {
   margin: 0;
   padding: 0;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
+  /* permitir el comportamiento de overscroll para evitar bloquear el scroll en algunos navegadores */
+  overscroll-behavior: auto;
+  overscroll-behavior-y: auto;
 }
 
 /* Asegurar que todos los elementos respeten el ancho del viewport */
@@ -36,7 +37,8 @@ body {
   min-height: 100vh;
   height: auto;
   position: relative;
-  overscroll-behavior: none;
+  /* permitir overscroll por defecto */
+  overscroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
 }
 
