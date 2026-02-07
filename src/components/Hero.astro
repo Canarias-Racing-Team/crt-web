@@ -29,7 +29,7 @@ const buttons = [
   <div class="w-full flex justify-center px-4">
     <h1 class="text-4xl md:text-6xl lg:text-8xl max-w-[814.2px] w-full z-10">
       <span
-        class="grid w-full place-items-center gap-x-2 md:gap-x-4 font-black tracking-wider leading-none"
+        class="grid hero-title-grid w-full place-items-center gap-x-2 md:gap-x-4 font-black tracking-wider leading-none"
       >
         <span class="text-white col-start-1 row-start-1 text-right w-full"
           >OCHO</span
@@ -72,7 +72,11 @@ const buttons = [
 
 <style>
   .hero-title-grid {
+    display: grid;
     grid-template-columns: repeat(2, max-content);
+    grid-auto-rows: min-content;
     gap: 0.05em 0.2em;
+    align-items: center;
+    justify-content: center;
   }
 </style>
