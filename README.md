@@ -1,6 +1,7 @@
 # Canarias Racing Team Web
 
 [![tomas2p](https://img.shields.io/badge/Developed_by-Tomas2p-c97a00?style=for-the-badge)](https://github.com/tomas2p)
+[![LICENSE](https://img.shields.io/badge/License-GPL--3.0-white?style=for-the-badge)](LICENSE)
 ![Astro](https://img.shields.io/badge/Built_with-Astro-0f172a?style=for-the-badge&logo=astro&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Styled_with-TailwindCSS-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![DaisyUI](https://img.shields.io/badge/UI-DaisyUI-5a0fc8?style=for-the-badge&logo=daisyui&logoColor=white)
