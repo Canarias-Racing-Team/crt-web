@@ -82,11 +82,8 @@ const articlePath = `/news/${noticia.url}`;
 const publishedDate = noticia.Fecha;
 
 // Fecha formateada para mostrar en la UI
-const formattedDate = new Date(noticia.Fecha).toLocaleDateString("es-ES", {
-  day: "2-digit",
-  month: "long",
-  year: "numeric",
-});
+const _d = new Date(noticia.Fecha);
+const formattedDate = `${String(_d.getUTCDate()).padStart(2, "0")} ${_d.toLocaleDateString("es-ES", { month: "long", timeZone: "UTC" })}, ${_d.getUTCFullYear()}`;
 
 // Tags relacionados con Formula Student y automovilismo
 const articleTags = [

@@ -58,7 +58,11 @@ const {
         Content ? (
           <Content />
         ) : noticia.Contenido ? (
-          noticia.Contenido.substring(0, 160) + "..."
+          (() => {
+            // Quita bloques de iframe
+            const contenidoSinIframe = noticia.Contenido.replace(/<iframe[\s\S]*?<\/iframe>/gi, "");
+            return contenidoSinIframe.substring(0, 160) + "...";
+          })()
         ) : (
           "Noticia del Canarias Racing Team"
         )
